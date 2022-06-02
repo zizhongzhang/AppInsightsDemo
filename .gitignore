@@ -248,3 +248,4 @@ sketch
 **/.idea/**/contentModel.xml
 **/.idea/**/modules.xml
 /WebSupport/AppSettings.config
+**/Properties
