@@ -8,15 +8,17 @@ public class AddressController : ControllerBase
 {
 
     private readonly ILogger<AddressController> _logger;
+    private readonly ContactContext _dbContext;
 
-    public AddressController(ILogger<AddressController> logger)
+    public AddressController(ILogger<AddressController> logger, ContactContext dbContext)
     {
         _logger = logger;
+        _dbContext = dbContext;
     }
 
     [HttpGet]
     public IActionResult GetAddress()
     {
-        return Ok("Australia");
+        return Ok(_dbContext.Address.FirstOrDefault());
     }
 }

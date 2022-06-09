@@ -1,3 +1,6 @@
+using api;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -10,6 +13,9 @@ builder.Services.AddCors(options =>
                           corsBuilder.WithOrigins(builder.Configuration["AllowedHosts"]);
                       });
 });
+
+builder.Services.AddDbContext<ContactContext>(options =>
+        options.UseSqlServer(builder.Configuration.GetConnectionString("ContactDatabase")));
 
 builder.Services.AddApplicationInsightsTelemetry();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
