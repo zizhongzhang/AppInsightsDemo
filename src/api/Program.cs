@@ -1,8 +1,16 @@
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
 builder.Services.AddControllers();
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "whitelistdomains",
+                      corsBuilder =>
+                      {
+                          corsBuilder.WithOrigins(builder.Configuration["AllowedHosts"]);
+                      });
+});
+
 builder.Services.AddApplicationInsightsTelemetry();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
